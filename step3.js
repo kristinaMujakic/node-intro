@@ -1,5 +1,6 @@
 const fs = require('fs');
 const axios = require('axios');
+const args = process.argv.slice(2);
 
 let cat = function (path) {
     fs.readFile(path, 'utf8', function (err, data) {
@@ -21,8 +22,6 @@ let webCat = async function (url) {
     }
 };
 
-const args = process.argv.slice(2);
-
 const outputToFile = function (content, readFile) {
     fs.writeFile(readFile, content, err => {
         if (err) {
@@ -39,6 +38,7 @@ if (args[0] === '--out') {
         console.error('No output file specified');
         process.exit(1);
     }
+
     readFile = args[1];
     content = args[2];
     outputToFile(content, readFile);
